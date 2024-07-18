@@ -53,3 +53,6 @@ install_grub_theme() {
 
     echo -e "${GREEN} Theme for resolution $SELECTED_RESOLUTION installed successfully. ${NC}"
 }
+
+echo -e "${GREEN} Installing QnDWM Grub Theme. ${NC}"
+install_grub_theme
