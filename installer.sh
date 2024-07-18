@@ -15,16 +15,16 @@ NC='\033[0m' # No Color
 ################################################################################################## FILE & FOLDER PATHS
 
 # Location
-APPLICATION="arch-suite"
+APPLICATION="grub"
 BASE="$HOME/bash.$APPLICATION"
 FILES="$BASE/files"
-
+# Grub Related
+BASE_THEME_DIR="$FILES/theme/qndwm"
+GRUB_THEME_DIR="/boot/grub/themes"
 
 ################################################################################################## INSTALLATION
 
 install_grub_theme() {
-    BASE_THEME_DIR="$BASEDIR/files/configurations/theming/grub/qndwm"
-    GRUB_THEME_DIR="/boot/grub/themes"
     RESOLUTIONS=("1920x1080" "2560x1440" "3840x2160")
     SELECTED_RESOLUTION=""
 
@@ -36,14 +36,14 @@ install_grub_theme() {
     done
 
     if [[ -z "$SELECTED_RESOLUTION" ]]; then
-        echo "No supported resolution found. Exiting."
+        echo -e "${RED} No supported resolution found. Exiting. ${NC}"
         return 1
     fi
 
     THEME_SOURCE="$BASE_THEME_DIR/$SELECTED_RESOLUTION"
 
     if [[ ! -d "$THEME_SOURCE" ]]; then
-        echo "Theme folder for resolution $SELECTED_RESOLUTION not found. Exiting."
+        echo -e "${RED} Theme folder for resolution $SELECTED_RESOLUTION not found. Exiting. ${NC}"
         return 1
     fi
 
@@ -51,5 +51,5 @@ install_grub_theme() {
     echo "GRUB_THEME=\"${GRUB_THEME_DIR}/$SELECTED_RESOLUTION/theme.txt\"" >> /etc/default/grub
     update-grub
 
-    echo "Theme for resolution $SELECTED_RESOLUTION installed successfully."
+    echo -e "${GREEN} Theme for resolution $SELECTED_RESOLUTION installed successfully. ${NC}"
 }
